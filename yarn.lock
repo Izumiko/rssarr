@@ -8734,10 +8734,10 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-ra-core@^4.16.15:
-  version "4.16.15"
-  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-4.16.15.tgz#110e7b6b701d09e0e4589ca6f5e742412fd6ee5f"
-  integrity sha512-S4bTYXHWCbYqjHVoTw2hmYo0Ny82sLmfMXxMLcFjVDjJ7mspt7Z/96y1t96i32jeYuoRhvXeHsIE3ABndkMWVw==
+ra-core@^4.16.15, ra-core@^4.16.16:
+  version "4.16.16"
+  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-4.16.16.tgz#b4f2f2fa2a7c73cb74a5b5b5d0ca33e8e705337f"
+  integrity sha512-WDeS68tx3VNWc57SAnpwMWftHIop18jxUyn5LYqA529j5XIjx8e3T2M6GtpElESLFZzpfS7O7Puo0TZBzA05zw==
   dependencies:
     clsx "^1.1.1"
     date-fns "^2.19.0"
@@ -8750,13 +8750,13 @@ ra-core@^4.16.15:
     react-is "^17.0.2"
     react-query "^3.32.1"
 
-ra-data-json-server@^4.16.5:
-  version "4.16.15"
-  resolved "https://registry.yarnpkg.com/ra-data-json-server/-/ra-data-json-server-4.16.15.tgz#1cb407e7d875d81767ede4f9bd904b6bf417e7db"
-  integrity sha512-vakPtkOlAsQODInOzHz89CGZ6cS8sEadrPBMbUnja/KR+RwqRUTN0kyT4VwXEpBdVoyK5Jz0auZtcpz669UdDA==
+ra-data-json-server@^4.16.16:
+  version "4.16.16"
+  resolved "https://registry.yarnpkg.com/ra-data-json-server/-/ra-data-json-server-4.16.16.tgz#4d648efda14fa627c9327feb46b3d7507510db2a"
+  integrity sha512-hHKsnCNnx038r7l64ruCXnzZ71A8i6dKsreHyMt0X/De84Aay+9B4hBEyUZc42IcKi8eqbUYGJTRBeOdLhXARQ==
   dependencies:
     query-string "^7.1.1"
-    ra-core "^4.16.15"
+    ra-core "^4.16.16"
 
 ra-i18n-polyglot@^4.16.15:
   version "4.16.15"
