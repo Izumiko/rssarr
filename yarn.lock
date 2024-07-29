@@ -588,11 +588,6 @@
     clsx "^2.1.0"
     prop-types "^15.8.1"
 
-"@mui/core-downloads-tracker@^5.15.20":
-  version "5.15.20"
-  resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.15.20.tgz#6ede705770797c32f5a4fc0d3002ad0b758d23e8"
-  integrity sha512-DoL2ppgldL16utL8nNyj/P12f8mCNdx/Hb/AJnX9rLY4b52hCMIx1kH83pbXQ6uMy6n54M3StmEbvSGoj2OFuA==
-
 "@mui/core-downloads-tracker@^5.16.0":
   version "5.16.0"
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.16.0.tgz#50153c698e321793c83a0283d8d7a9dc5d43858a"
@@ -605,25 +600,7 @@
   dependencies:
     "@babel/runtime" "^7.23.9"
 
-"@mui/material@^5.15.20":
-  version "5.15.20"
-  resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.15.20.tgz#87737404603ca2802a8e074b059f8329e013e615"
-  integrity sha512-tVq3l4qoXx/NxUgIx/x3lZiPn/5xDbdTE8VrLczNpfblLYZzlrbxA7kb9mI8NoBF6+w9WE9IrxWnKK5KlPI2bg==
-  dependencies:
-    "@babel/runtime" "^7.23.9"
-    "@mui/base" "5.0.0-beta.40"
-    "@mui/core-downloads-tracker" "^5.15.20"
-    "@mui/system" "^5.15.20"
-    "@mui/types" "^7.2.14"
-    "@mui/utils" "^5.15.20"
-    "@types/react-transition-group" "^4.4.10"
-    clsx "^2.1.0"
-    csstype "^3.1.3"
-    prop-types "^15.8.1"
-    react-is "^18.2.0"
-    react-transition-group "^4.4.5"
-
-"@mui/material@^5.16.0":
+"@mui/material@^5.15.20", "@mui/material@^5.16.0":
   version "5.16.0"
   resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.16.0.tgz#2ef4f52ae773574fc0a681f25705f376f5cd13f7"
   integrity sha512-DbR1NckTLpjt9Zut9EGQ70th86HfN0BYQgyYro6aXQrNfjzSwe3BJS1AyBQ5mJ7TdL6YVRqohfukxj9JlqZZUg==
@@ -641,15 +618,6 @@
     react-is "^18.2.0"
     react-transition-group "^4.4.5"
 
-"@mui/private-theming@^5.15.20":
-  version "5.15.20"
-  resolved "https://registry.yarnpkg.com/@mui/private-theming/-/private-theming-5.15.20.tgz#028c4e3c717a13691ac2c8c98e29aa819d89001a"
-  integrity sha512-BK8F94AIqSrnaPYXf2KAOjGZJgWfvqAVQ2gVR3EryvQFtuBnG6RwodxrCvd3B48VuMy6Wsk897+lQMUxJyk+6g==
-  dependencies:
-    "@babel/runtime" "^7.23.9"
-    "@mui/utils" "^5.15.20"
-    prop-types "^15.8.1"
-
 "@mui/private-theming@^5.16.0":
   version "5.16.0"
   resolved "https://registry.yarnpkg.com/@mui/private-theming/-/private-theming-5.16.0.tgz#c1abfd3e0d9c95459048240ef4209dc7f25dc949"
@@ -666,20 +634,6 @@
   dependencies:
     "@babel/runtime" "^7.23.9"
     "@emotion/cache" "^11.11.0"
-    csstype "^3.1.3"
-    prop-types "^15.8.1"
-
-"@mui/system@^5.15.20":
-  version "5.15.20"
-  resolved "https://registry.yarnpkg.com/@mui/system/-/system-5.15.20.tgz#f1933aabc4c10f8580c7a951ca3b88542ef0f76b"
-  integrity sha512-LoMq4IlAAhxzL2VNUDBTQxAb4chnBe8JvRINVNDiMtHE2PiPOoHlhOPutSxEbaL5mkECPVWSv6p8JEV+uykwIA==
-  dependencies:
-    "@babel/runtime" "^7.23.9"
-    "@mui/private-theming" "^5.15.20"
-    "@mui/styled-engine" "^5.15.14"
-    "@mui/types" "^7.2.14"
-    "@mui/utils" "^5.15.20"
-    clsx "^2.1.0"
     csstype "^3.1.3"
     prop-types "^15.8.1"
 
@@ -702,7 +656,7 @@
   resolved "https://registry.yarnpkg.com/@mui/types/-/types-7.2.14.tgz#8a02ac129b70f3d82f2f9b76ded2c8d48e3fc8c9"
   integrity sha512-MZsBZ4q4HfzBsywtXgM1Ksj6HDThtiwmOKUXH1pKYISI9gAVXCNHNpo7TlGoGrBaYWZTdNoirIN7JsQcQUjmQQ==
 
-"@mui/utils@^5.15.14", "@mui/utils@^5.15.20":
+"@mui/utils@^5.15.14":
   version "5.15.20"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.15.20.tgz#92778d749ce5ded1598639b4e684aaedb1146e08"
   integrity sha512-mAbYx0sovrnpAu1zHc3MDIhPqL8RPVC5W5xcO1b7PiSCJPtckIZmBkp8hefamAvUiAV8gpfMOM6Zb+eSisbI2A==
@@ -3162,10 +3116,10 @@ queue-microtask@^1.2.2, queue-microtask@^1.2.3:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-ra-core@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-5.0.3.tgz#89bc916065d38c70694ab7c182c3c5566259a71b"
-  integrity sha512-aTDY4CtX/TLPslGqCABPMFQR2KeiTlF1M8xJ/9SJpe7Cpd244AY9Gbtgx0YjEsW+HeI4/OSQXMEj+Sz0l0Xtiw==
+ra-core@^5.0.3, ra-core@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-5.1.0.tgz#b65700bb1a304fa7f2994ce6a4d63afa42816d0d"
+  integrity sha512-e4bv2AYRWC6sFDTmdjo2+zc0AUiJ74xkXEpXLcN3BqHodXbb+IOC55rUTS+rLx/q3lpyTLiJFxB4Yzv8p+1nbw==
   dependencies:
     "@tanstack/react-query" "^5.8.4"
     clsx "^2.1.1"
@@ -3187,25 +3141,25 @@ ra-data-json-server@^5.0.3:
     query-string "^7.1.3"
     ra-core "^5.0.3"
 
-ra-i18n-polyglot@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/ra-i18n-polyglot/-/ra-i18n-polyglot-5.0.3.tgz#35efef0c25e5cbdedb246535ee6b1dec3ea75ae0"
-  integrity sha512-zzC1+hjpwj/UQjF2poIEFgHSNsGF8cjWRCAgtSe7iNw+T9ztc5uqOHmDKzRzJaUv4QCLypN+QjGG85GRe9M8QQ==
+ra-i18n-polyglot@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/ra-i18n-polyglot/-/ra-i18n-polyglot-5.1.0.tgz#62c5fed15f78e9696345326cbe47732a69f35a1c"
+  integrity sha512-FrbdWwu0fiCIBsI7nYJ5ZF/nyxxzDZbXAnO6bvNby7DPAjnE3JqKVrC4JNe8f5/fcrYFWfFIUf0han3HQQQQXg==
   dependencies:
     node-polyglot "^2.2.2"
-    ra-core "^5.0.3"
+    ra-core "^5.1.0"
 
-ra-language-english@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-5.0.3.tgz#ea38e5171023fecfe8b8ef3a3a7ef7a0e50eb9a3"
-  integrity sha512-0qm+arNNk7aynYzKlH5s20VVPAYWz2jDfhIeRyBcDVRifC96XbkvTTiFtr9k96LtRyJUGocBROxuuqKsEzw3YA==
+ra-language-english@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-5.1.0.tgz#677047327e4cb37b5d842222b87f76738b5ee4ba"
+  integrity sha512-YIB8qaW8o1IDTU+ctn3kI0lp5gOnWFGbj6qsSOBzoFI5LD9sWr9lw1+xW53DjBVif88jaMLsqyLOt5Z5YtcVVA==
   dependencies:
-    ra-core "^5.0.3"
+    ra-core "^5.1.0"
 
-ra-ui-materialui@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-5.0.3.tgz#42561b69cdbb0cfe69f10a8a1cb0921434c0afe2"
-  integrity sha512-Y3COTPdztPSZekN7Vc3tP3nbj+4Q1wgCc4w4GEv6ET1Sme0JmzOA+ybgwbM8dKryqlMtnjuMGwIMz1gzPSewbQ==
+ra-ui-materialui@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-5.1.0.tgz#11beb7f06668810b59b6cc90e6430ecac8ef469b"
+  integrity sha512-dM3YkUGuEXRFFmhUbt6F/e7OEdyWBGtlr3LkK1Uu06c0GqUA25BUANi+9fbZdbTRhfaprh5FY1VZft0jCARCiQ==
   dependencies:
     "@tanstack/react-query" "^5.8.4"
     autosuggest-highlight "^3.1.1"
@@ -3236,19 +3190,19 @@ raw-body@2.5.2:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-react-admin@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-5.0.3.tgz#2334b46c7b5092e5331fc3559f5315c9a5037249"
-  integrity sha512-p8uuCgSCXGzad3EojVGPztIVXcCD7/GHnztywnKZwnfK3YSo9jJL8VYUpY/QnTJ6Gedz8eWRM9vFjBuyTKuwnw==
+react-admin@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-5.1.0.tgz#96e5571b5137dfbe59057803ea32dad2fe21ee8a"
+  integrity sha512-C/uXYf++3ayXmBinRuWVyCqhKUrssi3sxi7Yru30axhaXPQ7z5MEbXp135uQxWseD+mMkZhPKSr6fyVcckR0/w==
   dependencies:
     "@emotion/react" "^11.4.1"
     "@emotion/styled" "^11.3.0"
     "@mui/icons-material" "^5.15.20"
     "@mui/material" "^5.15.20"
-    ra-core "^5.0.3"
-    ra-i18n-polyglot "^5.0.3"
-    ra-language-english "^5.0.3"
-    ra-ui-materialui "^5.0.3"
+    ra-core "^5.1.0"
+    ra-i18n-polyglot "^5.1.0"
+    ra-language-english "^5.1.0"
+    ra-ui-materialui "^5.1.0"
     react-hook-form "^7.52.0"
     react-router "^6.22.0"
     react-router-dom "^6.22.0"
@@ -3277,12 +3231,7 @@ react-error-boundary@^4.0.13:
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-react-hook-form@^7.52.0:
-  version "7.52.0"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.52.0.tgz#e52b33043e283719586b9dd80f6d51b68dd3999c"
-  integrity sha512-mJX506Xc6mirzLsmXUJyqlAI3Kj9Ph2RhplYhUVffeOQSnubK2uVqBFOBJmvKikvbFV91pxVXmDiR+QMF19x6A==
-
-react-hook-form@^7.52.1:
+react-hook-form@^7.52.0, react-hook-form@^7.52.1:
   version "7.52.1"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.52.1.tgz#ec2c96437b977f8b89ae2d541a70736c66284852"
   integrity sha512-uNKIhaoICJ5KQALYZ4TOaOLElyM+xipord+Ha3crEFhTntdLvWZqVY49Wqd/0GiVCA/f9NjemLeiNPjG7Hpurg==
