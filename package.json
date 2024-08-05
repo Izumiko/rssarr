@@ -36,7 +36,7 @@
     "jsonwebtoken": "^9.0.2",
     "lowdb": "^1.0.0",
     "parse-torrent": "^11.0.17",
-    "qs": "^6.12.2",
+    "qs": "^6.13.0",
     "ra-data-json-server": "^5.0.3",
     "react": "^18.3.1",
     "react-admin": "^5.0.3",
