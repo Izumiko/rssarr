@@ -1,13 +1,18 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+
+interface LoginCredentials {
+  username: string;
+  password: string;
+}
 
 const authProvider = {
-  login: async ({ username, password }) => {
+  login: async ({ username, password }: LoginCredentials) => {
     const { data } = await axios.post('auth/login', {
       username, password
     });
     localStorage.setItem('token', data.token);
   },
-  checkError: (error) => {
+  checkError: (error: AxiosError) => {
     const status = error.status;
     if (status === 401 || status === 403) {
       localStorage.removeItem('token');

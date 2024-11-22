@@ -1,7 +1,7 @@
-import { Button, Grid, InputAdornment } from "@mui/material";
+import { Button, InputAdornment } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import {
   AutocompleteInput,
   Create,
@@ -11,10 +11,11 @@ import {
   TextInput,
   useNotify,
   useRecordContext,
+  EditProps,
+  CreateProps
 } from "react-admin";
 import { useFormContext, useWatch } from "react-hook-form";
 import useSWR from "swr";
-import { useClipboard } from "use-clipboard-copy";
 import Aside from "./Aside";
 import { BusProvider, useBus } from "./Bus";
 
@@ -31,7 +32,7 @@ const EscapeButton = () => {
   );
 };
 
-const choicesFetcher = async (api) => {
+const choicesFetcher = async (api: string) => {
   const { data } = await axios(`sonarr${api}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -40,9 +41,19 @@ const choicesFetcher = async (api) => {
   return data;
 };
 
+interface Season {
+  seasonNumber: number;
+  monitored: boolean;
+}
+
+interface Series {
+  title: string;
+  seasons: Season[];
+}
+
 const useSeries = () => {
   const notify = useNotify();
-  const { data: series } = useSWR("/series", choicesFetcher, {
+  const { data: series } = useSWR<Series[]>("/series", choicesFetcher, {
     fallbackData: [],
     onError: (e) => {
       console.error(e);
@@ -63,17 +74,17 @@ const SeasonChoiceDiv = styled('div')({
 });
 
 const SeasonChoice = () => {
-  const record = useRecordContext();
+  const record = useRecordContext<Season>()!;
   const { monitored, seasonNumber } = record;
   return (
     <div>
-      <SeasonChoiceDiv sx={[monitored && { backgroundColor: 'green' }]} />
+      <SeasonChoiceDiv sx={[ monitored && { backgroundColor: 'green' }]} />
       {`${seasonNumber}`.padStart(2, "0")}{" "}
     </div>
   );
 };
 
-const SeasonsInput = ({ series }) => {
+const SeasonsInput = ({ series }: { series: Series[] }) => {
   const seriesTitle = useWatch({ name: "series", defaultValue: "" });
   const seasonChoices = useMemo(
     () =>
@@ -100,8 +111,8 @@ const RefreshButton = () => {
   const bus = useBus();
 
   const onClick = useCallback(() => {
-    bus?.emit("refresh");
-  }, []);
+    bus?.emit("refresh", null);
+  }, [bus]);
 
   return (
     <Button color="primary" onClick={onClick}>
@@ -110,22 +121,49 @@ const RefreshButton = () => {
   );
 };
 
+const copyToClipboard = (text: string): boolean => {
+  // For http context
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  
+  try {
+    // for https context
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text);
+      return true;
+    }
+
+    const result = document.execCommand('copy');
+    return result;
+  } catch (err) {
+    console.error('Failed to copy:', err);
+    return false;
+  } finally {
+    document.body.removeChild(textarea);
+  }
+};
+
+
 const ProxyButton = () => {
-  const clipboard = useClipboard();
   const remote = useWatch({ name: "remote", defaultValue: "" });
   const notify = useNotify();
 
   return (
     <Button
       color="primary"
-      onClick={() => {
+      onClick={async () => {
         if (!remote) {
           notify("No remote link to proxy");
         } else {
           const url = remote.replace(/https?:\/\//, '');
           const proxy = `${location.protocol}//${location.host}${location.pathname}RSS/${url}`;
-          clipboard.copy(proxy);
-          notify("Proxied RSS link copied");
+          const success = copyToClipboard(proxy);
+          notify(success ? "Proxied RSS link copied" : "Failed to copy RSS link");
         }
       }}
     >
@@ -134,40 +172,20 @@ const ProxyButton = () => {
   );
 };
 
-const TorznabButton = () => {
-  const clipboard = useClipboard();
-  const remote = useWatch({ name: "remote", defaultValue: "" });
-  const notify = useNotify();
-
-  return (
-    <Button
-      color="primary"
-      onClick={() => {
-        if (!remote) {
-          notify("No remote link for Torznab");
-        } else {
-          const url = remote.replace(/https?:\/\//, '');
-          const torznab = `${location.protocol}//${location.host}${location.pathname}Torznab/${url}`;
-          clipboard.copy(torznab);
-          notify("Torznab link copied");
-        }
-      }}
-    >
-      Torznab
-    </Button>
-  );
-};
-
-function debounce(func, wait, immediate) {
-  let timeout;
-  return function () {
-    const context = this, args = arguments;
-    clearTimeout(timeout);
-    if (immediate && !timeout) func.apply(context, args);
-    timeout = setTimeout(function () {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    }, wait);
+function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  wait: number,
+  immediate: boolean
+) {
+  let timeout: Timer | null = null;
+  return function(this: ThisParameterType<T>, ...args: Parameters<T>) {
+  	const context = this;
+  	clearTimeout(timeout!);
+  	if (immediate && !timeout) func.apply(context, args);
+  	timeout = setTimeout(() => {
+  		timeout = null;
+  		if (!immediate) func.apply(context, args);
+  	}, wait);
   };
 }
 
@@ -178,7 +196,7 @@ const RemoteInput = () => {
     () =>
       debounce((remote) => {
         bus?.setField("url", remote);
-      }, 1000),
+      }, 1000, false),
     [bus]
   );
   useEffect(() => {
@@ -190,28 +208,28 @@ const RemoteInput = () => {
       fullWidth
       source="remote"
       type="url"
-      InputProps={{
-        endAdornment: (
-          <>
-            <RefreshButton />
-            <ProxyButton />
-            <TorznabButton />
-          </>
-        ),
+      slotProps={{
+        input: {
+          endAdornment: (
+            <>
+              <RefreshButton />
+              <ProxyButton />
+            </>
+          ),
+        },
       }}
     />
   );
 };
 
 const PatternInput = () => {
-  const clipboard = useClipboard();
   const notify = useNotify();
   const { setValue } = useFormContext();
 
   const bus = useBus();
   useEffect(() => {
     if (!bus) return;
-    const listener = (title) => {
+    const listener = (title: string) => {
       setValue("pattern", title.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&"));
       notify("Replaced pattern with selected item");
     };
@@ -219,7 +237,7 @@ const PatternInput = () => {
     return () => {
       bus.off("item", listener);
     };
-  }, [bus]);
+  }, [bus, notify, setValue]);
 
   const pattern = useWatch({ name: "pattern", defaultValue: "" });
   useEffect(() => {
@@ -231,46 +249,60 @@ const PatternInput = () => {
       multiline
       fullWidth
       source="pattern"
-      InputProps={{
-        endAdornment: (
-          <>
-            <EscapeButton />
-            <Button
-              color="primary"
-              onClick={() => {
-                clipboard.copy("(?<episode>\\d+)");
-                notify("Episode pattern copied");
-              }}
-            >
-              Episode
-            </Button>
-            <Button
-              color="primary"
-              onClick={() => {
-                clipboard.copy("(?<subgroup>.*?)");
-                notify("SubGroup pattern copied");
-              }}
-            >
-              Group
-            </Button>
-          </>
-        ),
+      slotProps={{
+        input: {
+          endAdornment: (
+            <>
+              <EscapeButton />
+              <Button
+                color="primary"
+                onClick={() => {
+                  const success = copyToClipboard("(?<episode>\\d+)");
+                  notify(success ? "Episode pattern copied" : "Failed to copy Episode pattern");
+                }}
+              >
+                Episode
+              </Button>
+              <Button
+                color="primary"
+                onClick={() => {
+                  const success = copyToClipboard("(?<subgroup>.*?)");
+                  notify(success ? "SubGroup pattern copied" : "Failed to copy SubGroup pattern");
+                }}
+              >
+                Group
+              </Button>
+            </>
+          ),
+        }
       }}
-      onBlur
+      onBlur = {() => {}}
     />
   );
 };
 
-const PatternEdit = (props) => {
+interface PatternRecord {
+  id: string;
+  remote: string;
+  pattern: string;
+  series: string;
+  season: string;
+  offset: number;
+  language: string;
+  quality: string;
+}
+
+const PatternEdit = (props: EditProps) => {
   const series = useSeries();
   const choices = useMemo(
     () =>
-      series.map(({ title }) => ({
+      series?.map(({ title }) => ({
         id: title,
         name: title,
       })),
     [series]
   );
+  if (!series) return null;
 
   return (
     <BusProvider>
@@ -290,22 +322,23 @@ const PatternEdit = (props) => {
   );
 };
 
-const patternDefaultValue = () => ({
+const patternDefaultValue = (): Partial<PatternRecord> => ({
   offset: 0,
   language: "Chinese",
   quality: "WEBDL 1080p",
 });
 
-const PatternCreate = (props) => {
+const PatternCreate = (props: CreateProps) => {
   const series = useSeries();
   const choices = useMemo(
     () =>
-      series.map(({ title }) => ({
+      series?.map(({ title }) => ({
         id: title,
         name: title,
       })),
     [series]
   );
+  if (!series) return null;
 
   return (
     <BusProvider>

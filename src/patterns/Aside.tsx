@@ -12,9 +12,9 @@ import axios from "axios";
 import { useNotify } from "ra-core";
 import { useEffect, useMemo } from "react";
 import useSWR from "swr";
-import { useBus, useBusField } from "./Bus.jsx";
+import { useBus, useBusField } from "./Bus.tsx";
 
-const fetcher = async (url) => {
+const fetcher = async (url: string): Promise<string[]> => {
   // use a proxy to bypass CORS
   const { data } = await axios.get(
     new URL(`proxy?url=${encodeURIComponent(url)}`, location.href).href,
@@ -51,7 +51,7 @@ const Aside = () => {
     };
   }, [bus, mutate]);
 
-  const patternString = useBusField("pattern") ?? "";
+  const patternString: string = useBusField("pattern") ?? "";
   const patternRegex = useMemo(() => {
     try {
       return new RegExp(`^${patternString}$`);
@@ -61,7 +61,7 @@ const Aside = () => {
     }
   }, [patternString]);
   const matchedData = useMemo(() => {
-    return data.map((title) => ({
+    return data.map((title: string) => ({
       title,
       matched: patternRegex && Boolean(title.match(patternRegex)),
     }));

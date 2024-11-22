@@ -1,4 +1,4 @@
-import React from "react";
+import { StrictMode } from 'react'
 import { Admin } from "react-admin";
 import { SWRConfig } from "swr";
 import authProvider from "./auth";
@@ -6,7 +6,7 @@ import dataProvider from "./data";
 import patternResource from "./patterns";
 
 const App = () => (
-  <React.StrictMode>
+  <StrictMode>
     <SWRConfig
       value={{
         shouldRetryOnError: false,
@@ -20,7 +20,7 @@ const App = () => (
         {patternResource}
       </Admin>
     </SWRConfig>
-  </React.StrictMode>
+  </StrictMode>
 );
 
 export default App;
