@@ -1,7 +1,6 @@
-import React from "react";
 import { Resource } from "react-admin";
-import { PatternCreate, PatternEdit } from "./Edit.jsx";
-import PatternList from "./List.jsx";
+import { PatternCreate, PatternEdit } from "./Edit.tsx";
+import PatternList from "./List.tsx";
 
 const patternResource = (
   <Resource

@@ -1,5 +1,4 @@
-import React from "react";
-import { Datagrid, List, Pagination, TextField, Filter, TextInput } from "react-admin";
+import { Datagrid, List, Pagination, TextField, Filter, TextInput, ListProps } from "react-admin";
 
 const PatternFilters = () => (
   <Filter>
@@ -7,11 +6,11 @@ const PatternFilters = () => (
   </Filter>
 );
 
-const PatternPagination = (props) => (
+const PatternPagination = (props: any) => (
   <Pagination rowsPerPageOptions={[30, 50, 100]} {...props} />
 );
 
-const PatternList = (props) => (
+const PatternList = (props: ListProps) => (
   <List
     sort={{
       field: "id",
