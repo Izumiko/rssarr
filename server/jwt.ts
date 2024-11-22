@@ -1,12 +1,10 @@
 import { Elysia } from 'elysia'
 import { jwt } from '@elysiajs/jwt'
-import db from './db'
-import type { Settings } from './db'
+import {dbGetById} from './db'
+import type { SettingItem } from './db'
 
-const secret = (db.data['settings'] as Settings).jwtSecret
-const adminUser = (db.data['settings'] as Settings).adminUsername
-const adminPass = (db.data['settings'] as Settings).adminPassword
-const baseUrl = (db.data['settings'] as Settings).baseUrl || '/'
+const secret = (dbGetById('settings', 'jwtSecret') as SettingItem).value
+const baseUrl = (dbGetById('settings', 'baseUrl') as SettingItem).value || '/'
 
 const jwtPlugin = new Elysia()
   .use(
@@ -28,8 +26,10 @@ type JwtContext = {
 const authRoute = new Elysia()
   .post(`${baseUrl}auth/login`, async ({ body, jwt }: { body: any } & JwtContext) => {
     const { username, password } = body;
-    console.log(username, password);
-    
+
+    const adminUser =  (dbGetById('settings', 'adminUsername') as SettingItem).value
+    const adminPass = (dbGetById('settings', 'adminPassword') as SettingItem).value
+
     if (username === adminUser && password === adminPass) {
       const token = await jwt.sign({
         username,

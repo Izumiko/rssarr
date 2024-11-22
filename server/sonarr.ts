@@ -1,10 +1,7 @@
 import { Elysia } from 'elysia'
-import db from './db'
-import type { Settings } from './db'
+import {dbGetById} from './db'
+import type { SettingItem } from './db'
 
-const sonarrUrl = (db.data['settings'] as Settings).sonarrApiUrl
-const sonarrApiKey = (db.data['settings'] as Settings).sonarrApiKey
-const targetUrl = sonarrUrl.endsWith('/') ? sonarrUrl + 'api/v3' : sonarrUrl + '/api/v3'
 
 const appSonarr = <T extends string>(config: { prefix: T }) => new Elysia({
   name: 'sonarr-api',
@@ -12,7 +9,10 @@ const appSonarr = <T extends string>(config: { prefix: T }) => new Elysia({
 })
   .all(`${config.prefix}sonarr/*`, async ({ request }) => {
     const path = request.url.split('/sonarr')[1]
-
+    const sonarrUrl = (dbGetById('settings', 'sonarrApiUrl') as SettingItem).value
+    const sonarrApiKey = (dbGetById('settings', 'sonarrApiKey') as SettingItem).value
+    const targetUrl = sonarrUrl.endsWith('/') ? sonarrUrl + 'api/v3' : sonarrUrl + '/api/v3'
+    
     try {
       const response = await fetch(`${targetUrl}${path}`, {
         method: request.method,

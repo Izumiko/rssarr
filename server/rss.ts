@@ -1,8 +1,8 @@
 import { Parser, Builder } from 'xml2js'
 import qs from 'qs'
 import { Elysia } from 'elysia'
-import db, { Pattern } from './db'
-import type { Settings } from './db'
+import db, {dbGetById} from './db'
+import type { Pattern, SettingItem } from './db'
 import { httpClient } from './proxy'
 
 const parser = new Parser()
@@ -53,7 +53,7 @@ const appRss = <T extends string>(config: { prefix: T }) => new Elysia({
     const proto = headers['x-forwarded-proto'] || request.url.split(':')[0]
     const proxyhost = headers['x-forwarded-host'] || headers['host']
     console.log(proto, proxyhost)
-    let torrentProxy = proto + "://" + proxyhost + (db.data['settings'] as Settings).baseUrl
+    let torrentProxy = proto + "://" + proxyhost + (dbGetById('settings', 'baseUrl') as SettingItem).value 
     if (torrentProxy.endsWith('/')) torrentProxy += 'torrent'
     else torrentProxy += '/torrent'
 
