@@ -1,12 +1,12 @@
 import axios from 'axios'
 import { Parser } from 'xml2js'
 import { Elysia } from 'elysia'
-import db from './db'
-import type { Settings } from './db'
+import {dbGetById} from './db'
+import type { SettingItem } from './db'
 
 const parser = new Parser()
 
-const proxyConfig = (db.data['settings'] as Settings).httpProxy
+const proxyConfig = (dbGetById('settings', 'httpProxy') as SettingItem).value
 const httpProxy = proxyConfig.length > 4 ? new URL(proxyConfig) : null
 
 const httpClient = axios.create({

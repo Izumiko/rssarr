@@ -4,6 +4,7 @@ import { SWRConfig } from "swr";
 import authProvider from "./auth";
 import dataProvider from "./data";
 import patternResource from "./patterns";
+import settingsResource from './settings';
 
 const App = () => (
   <StrictMode>
@@ -18,6 +19,7 @@ const App = () => (
         disableTelemetry
       >
         {patternResource}
+        {settingsResource}
       </Admin>
     </SWRConfig>
   </StrictMode>

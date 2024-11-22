@@ -2,16 +2,18 @@ import axios, { AxiosError } from 'axios'
 import parseTorrent from 'parse-torrent'
 import { Elysia, t } from 'elysia'
 import { httpClient } from './proxy'
-import db from './db'
-import type { Settings } from './db'
+import {dbGetById} from './db'
+import type { SettingItem } from './db'
 
-const qbUrl = (db.data['settings'] as Settings).qbittorrentUrl
-const qbUser = (db.data['settings'] as Settings).qbittorrentUsername
-const qbPass = (db.data['settings'] as Settings).qbittorrentPassword
+let qbUrl = (dbGetById('settings', 'qbittorrentUrl') as SettingItem).value
 
 let QB_SID = ''
 const login = async () => {
-    try {
+  try {
+    qbUrl = (dbGetById('settings', 'qbittorrentUrl') as SettingItem).value
+    const qbUser = (dbGetById('settings', 'qbittorrentUsername') as SettingItem).value
+    const qbPass = (dbGetById('settings', 'qbittorrentPassword') as SettingItem).value
+    
         const data = new URLSearchParams()
         data.append('username', qbUser)
         data.append('password', qbPass)

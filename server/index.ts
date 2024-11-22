@@ -7,10 +7,10 @@ import { appProxy } from './proxy'
 import { appTorrent } from './qbittorrent'
 import { appRss } from './rss'
 import { appSonarr } from './sonarr'
-import db from './db'
-import type { Settings } from './db'
+import {dbGetById} from './db'
+import type { SettingItem } from './db'
 
-const baseUrl = (db.data['settings'] as Settings).baseUrl || '/'
+const baseUrl = (dbGetById('settings', 'baseUrl') as SettingItem).value || '/'
 const port = parseInt(process.env.PORT || "12306")
 
 new Elysia()
