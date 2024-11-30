@@ -65,7 +65,8 @@ const appRss = <T extends string>(config: { prefix: T }) => new Elysia({
       pattern: new RegExp(`^${pattern}$`),
       ...rest,
     }))
-    const releaseGroup = /^[\[【](?<subgroup>[^\]】]+?)[\]】].*$/
+    const releaseGroup = /^[[【](?<subgroup>[^\]】]+?)[\]】].*$/
+    const revExp = /[[\s][vV](?<rev>\d+?)[\]\s]/
 
     // trackers for magnet
     const trackers = new URLSearchParams()
@@ -83,8 +84,15 @@ const appRss = <T extends string>(config: { prefix: T }) => new Elysia({
       const enclosure = item?.enclosure || [{ $: { url: link[0], type: 'application/x-bittorrent', length: 0 } }]
       const pubDate = item?.pubDate || item?.torrent?.[0]?.pubDate || [new Date().toISOString()]
       const isMagnet = enclosure[0].$.url.startsWith("magnet:")
+      const revMatch = title.match(revExp)
+      let titleCleaned = title
+      let rev = ''
+      if (revMatch?.groups?.rev) {
+        titleCleaned = title.replace(revExp, '')
+        rev = `v${revMatch.groups.rev}`
+      }
       for (const { pattern, series, season, language, quality, offset } of rules) {
-        const match = title.match(pattern)
+        const match = titleCleaned.match(pattern)
         if (!match?.groups?.episode) continue
         const { episode } = match.groups
         const episodeWithOffset =
@@ -95,13 +103,13 @@ const appRss = <T extends string>(config: { prefix: T }) => new Elysia({
           const { subgroup } = match.groups
           group = `[${subgroup}] `
         } else {
-          const res = title.match(releaseGroup)
+          const res = titleCleaned.match(releaseGroup)
           if (res?.groups?.subgroup) {
             const { subgroup } = res.groups;
             group = `[${subgroup}] `
           }
         }
-        const normalized = `${group}${series} - S${season}E${epWithPadding} - ${language} - ${quality}`
+        const normalized = `${group}${series} - S${season}E${epWithPadding}${rev} - ${language} - ${quality}`
         let newUrl = ''
         if (isMagnet) {
           const trackersStr = trackers.toString()
