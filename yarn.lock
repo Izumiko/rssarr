@@ -760,6 +760,18 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.59.16.tgz#aa4616e8a9c12afeef4cfbf3ed0f55f404d66e67"
   integrity sha512-crHn+G3ltqb5JG0oUv6q+PMz1m1YkjpASrXTU+sYWW9pLk0t2GybUHNRqYPZWhxgjPaVGC4yp92gSFEJgYEsPw==
 
+"@tanstack/query-core@5.64.2":
+  version "5.64.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.64.2.tgz#be06e7c7966d14ea3e7c82bea1086b463f2f6809"
+  integrity sha512-hdO8SZpWXoADNTWXV9We8CwTkXU88OVWRBcsiFrk7xJQnhm6WRlweDzMD+uH+GnuieTBVSML6xFa17C2cNV8+g==
+
+"@tanstack/react-query@^5.21.7":
+  version "5.64.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.64.2.tgz#199c8a5a8ff92a8565f8cdd378747398347512a2"
+  integrity sha512-3pakNscZNm8KJkxmovvtZ4RaXLyiYYobwleTMvpIGUoKRa8j8VlrQKNl5W8VUEfVfZKkikvXVddLuWMbcSCA1Q==
+  dependencies:
+    "@tanstack/query-core" "5.64.2"
+
 "@tanstack/react-query@^5.8.4":
   version "5.59.16"
   resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.59.16.tgz#1e701c6e6681965c04aa426df9da54b8edc6db1b"
@@ -3032,29 +3044,29 @@ queue-microtask@^1.2.3:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-ra-core@^5.3.2:
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-5.3.2.tgz#8d60096f9bd3b88339fa798f42be21791813199e"
-  integrity sha512-JDZ44jMCTlAXWWdR8LLFXXjKIc6bNf4L/zjY9/iL9yP5Kcy4yNf4kTBzR46dNWpt5/3k4Z59cMKBf+A9fDjJAQ==
+ra-core@^5.3.2, ra-core@^5.5.2:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-5.5.2.tgz#70755fd1680f4c48d75e18f5548eab423a230f8d"
+  integrity sha512-XH85pGHjDwuDkTWHKv3agrOxP9KWs1gx5KOnzVf9MTFqyOiA4rYIUSLakI/aovM+VYBJsU6Wku7qSOkoZeaZ8A==
   dependencies:
-    "@tanstack/react-query" "^5.8.4"
+    "@tanstack/react-query" "^5.21.7"
     clsx "^2.1.1"
     date-fns "^3.6.0"
     eventemitter3 "^5.0.1"
     inflection "^3.0.0"
     jsonexport "^3.2.0"
-    lodash "~4.17.5"
+    lodash "^4.17.21"
     query-string "^7.1.3"
     react-error-boundary "^4.0.13"
-    react-is "^18.2.0"
+    react-is "^18.2.0 || ^19.0.0"
 
-ra-data-json-server@^5.3.2:
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/ra-data-json-server/-/ra-data-json-server-5.3.2.tgz#368eaf38ddfe4c0c36b8a7ccfe30505f7666c147"
-  integrity sha512-ajhfsnvhT9XnJqof3IQDf75msCb2bZJc6coMaUtotFhRSRMcNShhwI1FpXgybV7ldBNNg01zi4SdUaN333QKQA==
+ra-data-json-server@^5.5.2:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/ra-data-json-server/-/ra-data-json-server-5.5.2.tgz#360765eec88c056c3fb5357a2134a2f064d824b7"
+  integrity sha512-MBzAN8h+K8QzmsslUwnKjbQhqcDtRFbpCgPGahHhjVkzoMkV6LAcfSUhf8xNUTu/eZxU82/tI8vvCeTBJD7HoA==
   dependencies:
     query-string "^7.1.3"
-    ra-core "^5.3.2"
+    ra-core "^5.5.2"
 
 ra-i18n-polyglot@^5.3.2:
   version "5.3.2"
@@ -3155,7 +3167,12 @@ react-is@^16.13.1, react-is@^16.7.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-is@^18.2.0, react-is@^18.3.1:
+"react-is@^18.2.0 || ^19.0.0":
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-19.0.0.tgz#d6669fd389ff022a9684f708cf6fa4962d1fea7a"
+  integrity sha512-H91OHcwjZsbq3ClIDHMzBShc1rotbfACdWENsmEf0IFvZ3FgGPtdHMcsv45bQ1hAbgdfiA8SnxTKfDS+x/8m2g==
+
+react-is@^18.3.1:
   version "18.3.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.3.1.tgz#e83557dc12eae63a99e003a46388b1dcbb44db7e"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
