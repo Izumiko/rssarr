@@ -1,11 +1,9 @@
 import React from "react";
-import { Datagrid, List, Pagination, TextField, Filter, TextInput } from "react-admin";
+import { Datagrid, List, Pagination, TextField, SearchInput } from "react-admin";
 
-const PatternFilters = () => (
-  <Filter>
-    <TextInput label='Search' source='q' alwaysOn />
-  </Filter>
-);
+const PatternFilters = [
+  <SearchInput source='q' alwaysOn />
+];
 
 const PatternPagination = (props) => (
   <Pagination rowsPerPageOptions={[30, 50, 100]} {...props} />
@@ -17,7 +15,7 @@ const PatternList = (props) => (
       field: "id",
       order: "DESC",
     }}
-    filters={PatternFilters()}
+    filters={PatternFilters}
     {...props}
     pagination={<PatternPagination />}
     perPage={30}
