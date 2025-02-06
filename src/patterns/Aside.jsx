@@ -92,7 +92,7 @@ const Aside = () => {
                 >
                   <ListItemText
                     primary={title}
-                    sx={[ matched && { color: '#1976d2' } ]}
+                    sx={[matched && { color: '#1976d2' }]}
                   />
                 </ListItemButton>
               ))}

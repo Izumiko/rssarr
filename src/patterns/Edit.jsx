@@ -67,7 +67,7 @@ const SeasonChoice = () => {
   const { monitored, seasonNumber } = record;
   return (
     <div>
-      <SeasonChoiceDiv sx={[ monitored && { backgroundColor: 'green' }]} />
+      <SeasonChoiceDiv sx={[monitored && { backgroundColor: 'green' }]} />
       {`${seasonNumber}`.padStart(2, "0")}{" "}
     </div>
   );
@@ -160,14 +160,14 @@ const TorznabButton = () => {
 
 function debounce(func, wait, immediate) {
   let timeout;
-  return function() {
-  	const context = this, args = arguments;
-  	clearTimeout(timeout);
-  	if (immediate && !timeout) func.apply(context, args);
-  	timeout = setTimeout(function() {
-  		timeout = null;
-  		if (!immediate) func.apply(context, args);
-  	}, wait);
+  return function () {
+    const context = this, args = arguments;
+    clearTimeout(timeout);
+    if (immediate && !timeout) func.apply(context, args);
+    timeout = setTimeout(function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    }, wait);
   };
 }
 

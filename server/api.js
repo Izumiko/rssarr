@@ -6,11 +6,11 @@ import './torznab.js';
 
 const router = jsonServer.router(db);
 const addId = (req, res, next) => {
-    if (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') {
-        req.body.offset = Number.parseInt(req.body.offset) || 0;
-        req.body.id = req.body.id || Math.max(...(db.get('patterns').value()).map(({ id }) => id)) + 1;
-    }
-    next();
+  if (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') {
+    req.body.offset = Number.parseInt(req.body.offset) || 0;
+    req.body.id = req.body.id || Math.max(...(db.get('patterns').value()).map(({ id }) => id)) + 1;
+  }
+  next();
 };
 
 srvRouter.use("/api", ...middlewares, addId, router);
