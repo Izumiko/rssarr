@@ -151,7 +151,8 @@ const torznabRoute = async (req, res) => {
             },
             "torznab:attr": [
               { $: { name: "seeders", value: "100" } },
-              { $: { name: "peers", value: "50" } }
+              { $: { name: "peers", value: "100" } },
+              { $: { name: "downloadvolumefactor", value: "0.0" } }
             ]
           }))
         }
