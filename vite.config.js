@@ -11,6 +11,8 @@ export default defineConfig({
       '/proxy': 'http://localhost:12306',
       '/RSS': 'http://localhost:12306',
       '/torrent': 'http://localhost:12306',
+      '/auth': 'http://localhost:12306',
+      '/Torznab': 'http://localhost:12306',
     },
   }
 })

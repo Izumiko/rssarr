@@ -2,6 +2,7 @@ import db from './db.cjs';
 import jsonServer from 'json-server';
 import { srvRouter } from './server.js';
 import middlewares from './jwt.js';
+import './torznab.js';
 
 const router = jsonServer.router(db);
 const addId = (req, res, next) => {

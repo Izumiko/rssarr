@@ -6,3 +6,4 @@ docker-compose.yml
 /index*
 dist
 .vscode/*
+.DS_Store

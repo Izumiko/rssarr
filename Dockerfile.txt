@@ -1,0 +1,13 @@
+FROM alpine:latest 
+
+WORKDIR /usr/src/app
+
+COPY package.json bun.lock yarn.lock index.html ./
+COPY dist/public ./public
+COPY server ./server
+COPY dist/index.mjs ./
+
+RUN apk --no-cache add ca-certificates nodejs
+EXPOSE 12306
+VOLUME /usr/src/app/data
+CMD ["/usr/bin/node", "index.mjs"]
