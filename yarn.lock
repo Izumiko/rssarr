@@ -3145,10 +3145,10 @@ queue-microtask@^1.2.3:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-ra-core@^5.5.3:
-  version "5.5.3"
-  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-5.5.3.tgz#9068b1704699b9da7bfc5ac1fce3c51f2311d901"
-  integrity sha512-HoyY0El+KODNGsuHr/t74kCb40B9kUCD7nYmGczgHla+URaJhu71ss86urS33zrSta9nGapoO7OUaxyVlaZF4A==
+ra-core@^5.5.3, ra-core@^5.7.2:
+  version "5.7.2"
+  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-5.7.2.tgz#858e8a48ca3e8d43130c58f10cb1d2637bdee255"
+  integrity sha512-/X/1fmrnsFzC+JWipV8xKW9Zg5NOrem3c6NkD110ij8jTlmeuQFkIZnrjpvqBcBRvk6r/BRRBJQ+6Aoo3HGPiQ==
   dependencies:
     "@tanstack/react-query" "^5.21.7"
     clsx "^2.1.1"
@@ -3161,13 +3161,13 @@ ra-core@^5.5.3:
     react-error-boundary "^4.0.13"
     react-is "^18.2.0 || ^19.0.0"
 
-ra-data-json-server@^5.5.3:
-  version "5.5.3"
-  resolved "https://registry.yarnpkg.com/ra-data-json-server/-/ra-data-json-server-5.5.3.tgz#aafecc7ecf8a7a04fb3c30cad47449d71469badb"
-  integrity sha512-UY4Bvvmap+6kLUtam0N2AZSkly8Rmg8LRpQ+oswHgYI+GQNm7Pc+C33lMk9Ot1+nuFHMtyY2jf3ksi1VqUOxEA==
+ra-data-json-server@^5.7.2:
+  version "5.7.2"
+  resolved "https://registry.yarnpkg.com/ra-data-json-server/-/ra-data-json-server-5.7.2.tgz#d5bd542436352ee7b5709012e737ffd57f09760a"
+  integrity sha512-ztgRpfj1/l+wSWkK/LjlVUcaXcNotY1blQlT0oRyXNXAc9dLvxJZY9Ku5j1lnaAR6wxovaO9vASGePiK4ptKLg==
   dependencies:
     query-string "^7.1.3"
-    ra-core "^5.5.3"
+    ra-core "^5.7.2"
 
 ra-i18n-polyglot@^5.5.3:
   version "5.5.3"
