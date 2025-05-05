@@ -3,12 +3,13 @@ import parseTorrent from 'parse-torrent'
 import { srvRouter } from './server.js';
 
 let QB_SID = '';
+const endpoint = process.env.QB_URL.endsWith('/') ? process.env.QB_URL : process.env.QB_URL + '/';
 const login = async () => {
   try {
     const data = new URLSearchParams();
     data.append('username', process.env.QB_USER);
     data.append('password', process.env.QB_PASS);
-    const resp = await axios.post(`${process.env.QB_URL}api/v2/auth/login`, data, {
+    const resp = await axios.post(`${endpoint}api/v2/auth/login`, data, {
       headers: {
         'Referer': `${process.env.QB_URL}`,
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -26,7 +27,7 @@ const renameTorrent = async (hash, name) => {
   data.append('hash', hash);
   data.append('name', name);
   try {
-    const resp = await axios.post(`${process.env.QB_URL}/api/v2/torrents/rename`, data, {
+    const resp = await axios.post(`${endpoint}api/v2/torrents/rename`, data, {
       headers: {
         Cookie: `SID=${QB_SID}`,
         'Content-Type': 'application/x-www-form-urlencoded'
