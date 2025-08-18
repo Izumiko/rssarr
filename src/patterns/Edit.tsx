@@ -172,6 +172,29 @@ const ProxyButton = () => {
   );
 };
 
+const TorznabButton = () => {
+  const remote = useWatch({ name: "remote", defaultValue: "" });
+  const notify = useNotify();
+
+  return (
+    <Button
+      color="primary"
+      onClick={async () => {
+        if (!remote) {
+          notify("No remote link for Torznab");
+        } else {
+          const url = remote.replace(/https?:\/\//, '');
+          const torznab = `${location.protocol}//${location.host}${location.pathname}Torznab/${url}`;
+          const success = copyToClipboard(torznab);
+          notify(success ? "Torznab link copied" : "Failed to copy Torznab link");
+        }
+      }}
+    >
+      Torznab
+    </Button>
+  );
+};
+
 function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number,
@@ -214,6 +237,7 @@ const RemoteInput = () => {
             <>
               <RefreshButton />
               <ProxyButton />
+              <TorznabButton />
             </>
           ),
         },

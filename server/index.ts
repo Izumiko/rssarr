@@ -1,34 +1,27 @@
 import { Elysia } from 'elysia'
 import { cors } from '@elysiajs/cors'
 import { staticPlugin } from '@elysiajs/static'
-import { jwtPlugin, authRoute, jwtGuard } from './jwt'
+import './db'
+import { authRoute, isAuthenticated } from './jwt'
 import { apiRoute } from './api'
-import { appProxy } from './proxy'
-import { appTorrent } from './qbittorrent'
-import { appRss } from './rss'
-import { appSonarr } from './sonarr'
-import {dbGetById} from './db'
-import type { SettingItem } from './db'
+import { proxyRoute } from './proxy'
+import { torrentRoute } from './qbittorrent'
+import { rssRoute } from './rss'
+import { sonarrRoute } from './sonarr'
+import torznabRoute from './torznab'
 
-const baseUrl = (dbGetById('settings', 'baseUrl') as SettingItem).value || '/'
-const port = parseInt(process.env.PORT || "12306")
+const port = parseInt(process.env.PORT || '12306')
+
+const protectedApi = new Elysia().use(isAuthenticated).use(apiRoute).use(proxyRoute).use(sonarrRoute)
 
 new Elysia()
   .use(cors())
-  .use(staticPlugin({assets: 'public'}))
-  .use(jwtPlugin)
+  .use(staticPlugin({ assets: 'public' }))
   .use(authRoute)
-  .guard({ beforeHandle: [jwtGuard] }, (app) => 
-    app.get('/api/*', () => 'Protected Content')
-      .get('/sonarr/*', () => 'Protected Content')
-      .get('/proxy', () => 'Protected Content')
-      .get('/', () => 'Protected Content')
-)
-  .use(apiRoute({prefix: baseUrl}))
-  .use(appProxy({ prefix: baseUrl }))
-  .use(appRss({prefix: baseUrl}))
-  .use(appTorrent({prefix: baseUrl}))
-  .use(appSonarr({prefix: baseUrl}))
+  .use(rssRoute)
+  .use(torrentRoute)
+  .use(torznabRoute)
+  .use(protectedApi)
   .listen(port, () => {
-  console.log(`App started on port ${port}`);
-})
+    console.log(`App started on port ${port}`)
+  })

@@ -5,6 +5,8 @@ import { httpClient } from './proxy'
 import {dbGetById} from './db'
 import type { SettingItem } from './db'
 
+let baseUrl = (dbGetById('settings', 'baseUrl') as SettingItem).value || ''
+baseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
 let qbUrl = (dbGetById('settings', 'qbittorrentUrl') as SettingItem).value
 
 let QB_SID = ''
@@ -13,11 +15,11 @@ const login = async () => {
     qbUrl = (dbGetById('settings', 'qbittorrentUrl') as SettingItem).value
     const qbUser = (dbGetById('settings', 'qbittorrentUsername') as SettingItem).value
     const qbPass = (dbGetById('settings', 'qbittorrentPassword') as SettingItem).value
-    
+    qbUrl = qbUrl.endsWith('/') ? qbUrl : qbUrl + '/'
         const data = new URLSearchParams()
         data.append('username', qbUser)
         data.append('password', qbPass)
-        const resp = await axios.post(`${qbUrl}/api/v2/auth/login`, data, {
+        const resp = await axios.post(`${qbUrl}api/v2/auth/login`, data, {
             headers: {
                 'Referer': `${qbUrl}`,
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -35,7 +37,7 @@ const renameTorrent = async (hash: string, name: string) => {
     data.append('hash', hash)
     data.append('name', name)
     try {
-      const resp = await axios.post(`${qbUrl}/api/v2/torrents/rename`, data, {
+      await axios.post(`${qbUrl}api/v2/torrents/rename`, data, {
         headers: {
           Cookie: `SID=${QB_SID}`,
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -73,11 +75,8 @@ const renameTorrent = async (hash: string, name: string) => {
     }
 }
 
-const appTorrent = <T extends string>(config: { prefix: T }) => new Elysia({
-  name: 'torrent',
-  seed: config,
-})
-  .get(`${config.prefix}torrent`, async ({ query, redirect }) => {
+export const torrentRoute = new Elysia({ prefix: baseUrl })
+  .get('/torrent', async ({ query, redirect }) => {
     const torrentUrl = query.url
     const newName = query.name
     console.log(`Downloading ${newName} from ${torrentUrl}`)
@@ -88,21 +87,16 @@ const appTorrent = <T extends string>(config: { prefix: T }) => new Elysia({
 
     // get torrent file to obtain infoHash
     let infoHash = ''
-    try {
         infoHash = await httpClient.get(torrentUrl, { responseType: 'arraybuffer' })
             .then(async response => {
-              const torrent = await parseTorrent(Buffer.from(response.data, 'binary'))
-                return torrent?.infoHash || ''
+              const torrent = parseTorrent(Buffer.from(response.data, 'binary'))
+                return torrent.infoHash || ''
             })
             .catch(e => {
                 console.error(e)
                 return ''
             });
         if (!infoHash) throw new Error('Failed to get infoHash')
-    } catch (e) {
-        console.error(e)
-        return
-    }
 
     // 302 redirect
     redirect(torrentUrl, 302)
@@ -123,9 +117,13 @@ const appTorrent = <T extends string>(config: { prefix: T }) => new Elysia({
         const status = await renameTorrent(infoHash, newName)
         if (status === 200) break
     }
+}, {
+  query: t.Object({
+    url: t.String(),
+    name: t.String(),
+  })
 })
 
 await login()
 
-export default appTorrent
-export { appTorrent }
+export default torrentRoute

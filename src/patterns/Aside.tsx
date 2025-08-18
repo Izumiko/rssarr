@@ -1,4 +1,4 @@
-import React from "react"
+// import React from "react"
 import {
   Card,
   CardContent,
@@ -57,6 +57,7 @@ const Aside = () => {
       return new RegExp(`^${patternString}$`);
     } catch (e) {
       // invalid regex
+      console.log((e as Error).message)
       return null;
     }
   }, [patternString]);
