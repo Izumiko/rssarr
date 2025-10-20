@@ -26,7 +26,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^6.5.0",
-    "axios": "^1.11.0",
+    "axios": "^1.12.0",
     "dotenv-cli": "^10.0.0",
     "express": "^5.1.0",
     "express-jwt": "^8.5.1",
@@ -52,6 +52,6 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "npm-run-all": "^4.1.5",
-    "vite": "^7.1.1"
+    "vite": "^7.1.11"
   }
 }
