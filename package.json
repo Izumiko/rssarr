@@ -25,9 +25,9 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/material": "^6.5.0",
-    "axios": "^1.11.0",
-    "dotenv-cli": "^10.0.0",
+    "@mui/material": "^7.3.4",
+    "axios": "^1.13.1",
+    "dotenv-cli": "^11.0.0",
     "express": "^5.1.0",
     "express-jwt": "^8.5.1",
     "global-agent": "^3.0.0",
@@ -35,23 +35,23 @@
     "json-server": "^0.17.4",
     "jsonwebtoken": "^9.0.2",
     "lowdb": "^7.0.1",
-    "parse-torrent": "^11.0.18",
+    "parse-torrent": "^11.0.19",
     "qs": "^6.14.0",
-    "ra-data-json-server": "^5.10.1",
-    "react": "^19.1.1",
-    "react-admin": "^5.10.1",
-    "react-dom": "^19.1.1",
-    "react-hook-form": "^7.62.0",
+    "ra-data-json-server": "^5.12.2",
+    "react": "^19.2.0",
+    "react-admin": "^5.12.2",
+    "react-dom": "^19.2.0",
+    "react-hook-form": "^7.66.0",
     "swr": "^2.3.4",
     "use-clipboard-copy": "^0.2.0",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.0.0",
-    "eslint": "^9.32.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
+    "@vitejs/plugin-react": "^5.1.0",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
     "npm-run-all": "^4.1.5",
-    "vite": "^7.1.1"
+    "vite": "^7.1.12"
   }
 }
