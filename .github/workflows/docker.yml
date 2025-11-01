@@ -27,7 +27,7 @@ jobs:
           bun run build:web && bun run build:server
           mv ./dist app
       - name: Upload files to Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: rssarr-${{ github.ref_name }}
           path: |
