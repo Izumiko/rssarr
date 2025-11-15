@@ -26,7 +26,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^6.5.0",
-    "axios": "^1.11.0",
+    "axios": "^1.12.0",
     "dotenv-cli": "^10.0.0",
     "express": "^5.1.0",
     "express-jwt": "^8.5.1",
