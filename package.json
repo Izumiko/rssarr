@@ -28,7 +28,7 @@
     "@mui/material": "^7.3.4",
     "axios": "^1.13.1",
     "dotenv-cli": "^11.0.0",
-    "express": "^5.1.0",
+    "express": "^5.2.0",
     "express-jwt": "^8.5.1",
     "global-agent": "^3.0.0",
     "http-proxy-middleware": "^3.0.5",
